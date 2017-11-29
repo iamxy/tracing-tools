@@ -1,0 +1,39 @@
+#! /usr/bin/env stap
+# Usage: sudo stap iotrace.stp -x <pid>
+
+probe begin
+{
+	printf("begin to trace thread IO");
+}
+
+probe vfs.read
+{
+	if (target() == pid()) {
+		printf("%s[%ld] - read %d from %s\n", execname(), tid(), bytes_to_read, reverse_path_walk($file->f_path->dentry))
+	}
+}
+
+probe vfs.write
+{
+	if (target() == pid())
+	{
+		printf("%s[%ld] - write %d to %s\n", execname(), tid(), bytes_to_write, reverse_path_walk($file->f_path->dentry))
+	}
+}
+
+probe vfs.open.return
+{
+	if (target() == pid())
+	{
+		printf("%s[%ld] - open %s\n", execname(), tid(), pathname)
+	}
+}
+
+probe syscall.close
+{
+	if (target() == pid())
+	{
+		file = task_fd_lookup(task_current(), fd)
+		printf("%s[%ld] - close %s\n", execname(), tid(), fullpath_struct_path(&@cast(file, "file")->f_path))
+	}
+}
