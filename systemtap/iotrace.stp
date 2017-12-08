@@ -3,17 +3,17 @@
 
 probe begin
 {
-	printf("begin to trace thread IO");
+	printf("begin to trace thread IO\n");
 }
 
-probe vfs.read
+probe vfs.read.return
 {
 	if (target() == pid()) {
 		printf("%s[%ld] - read %d from %s\n", execname(), tid(), bytes_to_read, reverse_path_walk($file->f_path->dentry))
 	}
 }
 
-probe vfs.write
+probe vfs.write.return
 {
 	if (target() == pid())
 	{
