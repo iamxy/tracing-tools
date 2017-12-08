@@ -71,7 +71,7 @@ probe scheduler.ctxswitch
             next
 
         printf("%-16s%5d %5d %5d:%5d:%s ==> %5d:%5d:%s %-16s\n",prev_task_name,
-		    task_cpu(prev_task),gettimeofday_ns(),prev_pid,prev_priority,
+            task_cpu(prev_task),gettimeofday_ns(),prev_pid,prev_priority,
             state_calc(prevtsk_state),next_pid,
             next_priority,state_calc(nexttsk_state),next_task_name)
 }
