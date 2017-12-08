@@ -22,19 +22,19 @@ global target_name
 
 function state_calc(state) {
     if(state == 0)
-    status = "R"
+        status = "R"
     if(state == 1)
-    status = "S"
+        status = "S"
     if(state == 2)
-    status = "D"
+        status = "D"
     if(state == 4)
-    status = "T"
+        status = "T"
     if(state == 8)
-    status = "T"
+        status = "T"
     if(state == 16)
-    status = "Z"
+        status = "Z"
     if(state == 32)
-    status = "EXIT_DEAD"
+        status = "EXIT_DEAD"
     return status
 }
 
@@ -51,11 +51,11 @@ probe scheduler.wakeup
             next
 
         printf("%-16s%5d %5d %5d:%5d:%s +   %5d:%5d:%s %-16s\n",
-        execname(), task_cpu(task), gettimeofday_ns(),
-        pid(), task_prio(task_current()),
-        state_calc(task_state(task_current())),
-        task_pid(task), task_prio(task), state_calc(task_state(task)),
-        task_execname(task))
+            execname(), task_cpu(task), gettimeofday_ns(),
+            pid(), task_prio(task_current()),
+            state_calc(task_state(task_current())),
+            task_pid(task), task_prio(task), state_calc(task_state(task)),
+            task_execname(task))
 }
 
 probe scheduler.ctxswitch
@@ -71,9 +71,9 @@ probe scheduler.ctxswitch
             next
 
         printf("%-16s%5d %5d %5d:%5d:%s ==> %5d:%5d:%s %-16s\n",prev_task_name,
-		task_cpu(prev_task),gettimeofday_ns(),prev_pid,prev_priority,
-        state_calc(prevtsk_state),next_pid,
-        next_priority,state_calc(nexttsk_state),next_task_name)
+		    task_cpu(prev_task),gettimeofday_ns(),prev_pid,prev_priority,
+            state_calc(prevtsk_state),next_pid,
+            next_priority,state_calc(nexttsk_state),next_task_name)
 }
 
 probe begin
@@ -92,4 +92,8 @@ probe begin
         if(@1 == "name")
             target_name = @2
     %)
+
+    printf("%-17s %3s %19s %5s: %3s:%s  %8s: %3s:%s %-17s\n", 
+        "PREV_PROCESS_NAME","CPU","TIMESTAMP","PID", "PRIO","S",
+        "NEXT_PID","PRIO","S","NEXT_PROCESS_NAME")
 }
