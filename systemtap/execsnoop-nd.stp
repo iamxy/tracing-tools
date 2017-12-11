@@ -29,12 +29,12 @@
 
 probe begin
 {
-	printf("%-24s %6s %6s %6s %14s %s\n", "TIME", "UID", "PPID", "PID",
-	    "COMM", "ARGS");
+    printf("%-24s %6s %6s %6s %14s %s\n", "TIME", "UID", "PPID", "PID",
+        "COMM", "ARGS");
 }
 
 probe nd_syscall.execve.return
 {
-	printf("%-24s %6d %6d %6d %14s %s\n", ctime(gettimeofday_s()), uid(),
-	    ppid(), pid(), execname(), cmdline_str());
+    printf("%-24s %6d %6d %6d %14s %s\n", ctime(gettimeofday_s()), uid(),
+        ppid(), pid(), execname(), cmdline_str());
 }

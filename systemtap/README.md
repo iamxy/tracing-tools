@@ -19,5 +19,5 @@ See [INSTALL.md](INSTALL.md) for installation steps on your platform.
 
 ### Syscall
 
-- [execsnoop-nd.stp](execsnoop-nd.stp): Trace process exec() with command line argument details. [Examples](execsnoop-nd_example.md)
-- [killsnoop-nd.stp](killsnoop-nd.stp): Trace kill() signals showing process and signal details. [Examples](killsnoop-nd_example.md)
+- [execsnoop-nd.stp](execsnoop-nd.stp): Trace process `exec()` with command line argument details. [Examples](execsnoop-nd_example.md)
+- [killsnoop-nd.stp](killsnoop-nd.stp): Trace `kill()` signals showing process and signal details. [Examples](killsnoop-nd_example.md)
