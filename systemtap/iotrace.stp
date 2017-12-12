@@ -15,32 +15,29 @@ probe begin
 
 probe vfs.read.return
 {
-    if (target() == pid()) {
-	    printf("%s[%ld] - read %d bytes from %s\n", execname(), tid(), bytes_read, reverse_path_walk($file->f_path->dentry))
-    }
+    if (target() != pid()) next
+     
+    printf("%s[%ld] - read %d bytes from %s\n", execname(), tid(), bytes_read, reverse_path_walk($file->f_path->dentry))
 }
 
 probe vfs.write.return
 {
-    if (target() == pid())
-    {
-        printf("%s[%ld] - write %d bytes to %s\n", execname(), tid(), bytes_written, reverse_path_walk($file->f_path->dentry))
-    }
+    if (target() != pid()) next
+
+    printf("%s[%ld] - write %d bytes to %s\n", execname(), tid(), bytes_written, reverse_path_walk($file->f_path->dentry))
 }
 
 probe vfs.open.return
 {
-    if (target() == pid())
-    {
-        printf("%s[%ld] - open %s\n", execname(), tid(), pathname)
-    }
+    if (target() != pid()) next
+
+    printf("%s[%ld] - open %s\n", execname(), tid(), pathname)
 }
 
 probe syscall.close
 {
-    if (target() == pid())
-    {
-        file = task_fd_lookup(task_current(), fd)
-        printf("%s[%ld] - close %s\n", execname(), tid(), fullpath_struct_path(&@cast(file, "file")->f_path))
-    }
+    if (target() != pid()) next
+
+    file = task_fd_lookup(task_current(), fd)
+    printf("%s[%ld] - close %s\n", execname(), tid(), fullpath_struct_path(&@cast(file, "file")->f_path))
 }
