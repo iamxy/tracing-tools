@@ -5,7 +5,7 @@
  *
  * Usage: sudo stap iotrace.stp -x <pid>
  * Example: sudo stap iotrace.stp -x 33709
- * Doc: See iotrace_example.md.
+ * Doc: See iotrace.md.
  */
 
 probe begin

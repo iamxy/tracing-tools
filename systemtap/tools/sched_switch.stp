@@ -5,7 +5,7 @@
  *
  * Usage: sudo stap sched_switch.stp pid <pid>
  * Example: sudo stap sched_switch.stp pid 43238
- * Doc: See sched_switch_example.md.
+ * Doc: See sched_switch.md.
  *
  * This script works similar to ftrace's sched_switch. It displays a list of
  * processes which get switched in and out of the scheduler. The format of display
