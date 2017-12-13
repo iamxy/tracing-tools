@@ -3,7 +3,7 @@
  * execsnoop-nd.stp    Trace process exec()s with arguments.
  * 
  * Usage: sudo stap execsnoop-nd.stp
- * Doc: See execsnoop-nd_example.md
+ * Doc: See execsnoop-nd.md
  * For Linux, uses SystemTap (non-debuginfo).
  *
  * This is useful for identifying new process creation, provided it follows the

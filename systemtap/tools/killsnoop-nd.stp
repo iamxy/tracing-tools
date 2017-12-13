@@ -3,7 +3,7 @@
  * killsnoop-nd.stp    Trace process signals.
  *
  * Usage: sudo stap killsnoop-nd.stp
- * Doc: See killsnoop-nd_example.md
+ * Doc: See killsnoop-nd.md
  * For Linux, uses SystemTap (non-debuginfo).
  *
  * Copyright (C) 2015 Brendan Gregg.

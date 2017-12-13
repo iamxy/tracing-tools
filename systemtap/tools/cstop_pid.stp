@@ -1,11 +1,11 @@
 #! /usr/bin/env stap
 
 /*
- * cstop_tid.stp    Trace top 20 context switch tid
+ * cstop_pid.stp    Trace top 20 context switch pid
  *
- * Usage: sudo stap cstop_tid.stp <interval>
- * Example: sudo stap cstop_tid.stp 1
- * Doc: See cstop_tid_example.md.
+ * Usage: sudo stap cstop_pid.stp <interval>
+ * Example: sudo stap cstop_pid.stp 1
+ * Doc: See cstop_pid.md.
  */
 
 global csw_count[999999]
@@ -13,7 +13,7 @@ global idle_count
 
 probe begin
 {
-    printf("begin to trace top 20 context switch tid\n");
+    printf("begin to trace top 20 context switch pid\n");
 }
 
 probe scheduler.cpu_off {
@@ -25,9 +25,9 @@ function fmt_task(task_prev, task_next)
 {
     return sprintf("%s(%d)->%s(%d)",
         task_execname(task_prev),
-        task_tid(task_prev),
+        task_pid(task_prev),
         task_execname(task_next),
-        task_tid(task_next))
+        task_pid(task_next))
 }
 
 function print_cswtop () {
