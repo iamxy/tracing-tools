@@ -31,6 +31,7 @@ probe tcp.sendmsg.return
     sport = __tcp_sock_sport(@entry($sk))
     dport = __tcp_sock_dport(@entry($sk))
 
+    // size: Number of bytes received or error code if an error occurred, error code cloud be negative.
     if (size > 0)
         printf("%15s[%ld] - %s:%ld send %d bytes -> %s:%ld\n", execname(), tid(), saddr, sport, size, daddr, dport)
 }
