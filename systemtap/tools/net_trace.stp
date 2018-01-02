@@ -22,11 +22,6 @@ probe kernel.function("tcp_accept").return?,
         printf("%15s[%ld] - port %d accept request from %s \n", execname(), tid(), inet_get_local_port(sock), inet_get_ip_source(sock))
 }
 
-// probe tcp.receive {
-//   printf(" %15s %15s  %5d  %5d  %d  %d  %d  %d  %d  %d\n",
-//          saddr, daddr, sport, dport, urg, ack, psh, rst, syn, fin)
-// }
-
 probe tcp.sendmsg.return
 {
     if (target() != pid()) next
