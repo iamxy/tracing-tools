@@ -2,7 +2,7 @@
 
 ```
 sudo yum install kernel-devel
-sudo yum --enablerepo=base-debuginfo kernel-debuginfo-$(uname -r) kernel-debuginfo-common-$(uname -m)-$(uname -r)
+sudo yum --enablerepo=base-debuginfo install kernel-debuginfo-$(uname -r) kernel-debuginfo-common-$(uname -m)-$(uname -r)
 sudo yum -y install systemtap systemtap-runtime
 ```
 
